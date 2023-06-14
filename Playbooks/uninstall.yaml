@@ -1,0 +1,19 @@
+---
+- name: uninstalling
+  hosts: all
+  become: yes
+  tasks:
+  - name: Uninstall PHP
+    package:
+      name: php*
+      state: absent
+  - name: Uninstall Apache
+    package:
+      name: apache2
+      state: absent
+  - name: Uninstall httpd
+    package:
+      name: httpd
+      state: absent
+
+      

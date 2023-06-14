@@ -1,0 +1,66 @@
+---
+- name: installation of lamp
+  hosts: all # if we give ' all ' it will run in redhat also it will fail
+  become: yes
+  tasks:
+    - name: Update packages installing ubuntu
+      ansible.builtin.apt:
+          name: apache2
+          update_cache: yes
+          state: present
+      when: ansible_facts['os_family'] == 'Debian'
+    - name: installing php packages
+      ansible.builtin.apt:
+        name:
+          - php
+          - libapache2-mod-php
+          - php-mysql
+        state: present
+      notify:
+        - restart ubuntu
+      when: ansible_facts['os_family'] == 'Debian'
+    - name: copy the info.php
+      ansible.builtin.copy:
+        src: info.php
+        dest: /var/www/html/info.php 
+      notify:
+        - restart ubuntu  
+      when: ansible_facts['os_family'] == 'Debian'  
+    - name: Update packages installing redhat
+      ansible.builtin.yum:
+          name: httpd
+          update_cache: yes
+          state: present
+      when: ansible_facts['os_family'] == 'RedHat'  
+ 
+    - name: enable systemctl start httpd
+      ansible.builtin.systemd:
+        name: httpd
+        enabled: yes
+        state: started
+      when: ansible_facts['os_family'] == 'RedHat'
+    - name: installing php packages
+      ansible.builtin.yum:
+        name:
+          - php
+        state: present
+      notify:
+        - restart redhat
+      when: ansible_facts['os_family'] == 'RedHat'
+    - name: copy the info.php
+      ansible.builtin.copy:
+        src: info.php
+        dest: /var/www/html/info.php
+      notify:
+        - restart redhat
+      when: ansible_facts['os_family'] == 'RedHat'
+  handlers:
+    - name: restart ubuntu
+      ansible.builtin.systemd:
+        name: apache2
+        state: restarted
+    - name: restart redhat
+      ansible.builtin.systemd:
+        name: httpd
+        state: restarted
+      
