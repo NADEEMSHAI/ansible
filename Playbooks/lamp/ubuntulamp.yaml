@@ -1,0 +1,46 @@
+# Manual steps for lamp server installation
+# sudo apt update
+# sudo apt install apache2 -y
+# sudo apt install mysql-server -y
+# sudo apt install php libapache2-mod-php php-mysql -y
+# sudo -i 
+   # /var/www/html/info.php
+   # <?php phpinfo (); ?>
+   # These command for to set the php path in sudoers user
+   #exit
+# sudo systemctl restart apache2
+# check the node public ip /info.php
+
+---
+- name: installation of lamp
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update packages installing ubuntu
+      ansible.builtin.apt:
+          name: apache2
+          update_cache: yes
+          state: present
+    - name: installing php packages
+      ansible.builtin.apt:
+        name:
+          - php
+          - libapache2-mod-php
+          - php-mysql
+        state: present
+    - name: copy the info.php
+      ansible.builtin.copy:
+        src: info.php
+        dest: /var/www/html/info.php
+    - name: restart systemctl
+      ansible.builtin.systemd:
+        name: apache2
+        state: restarted
+
+        
+      
+      
+
+
+      
+    

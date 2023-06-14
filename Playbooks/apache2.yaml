@@ -1,0 +1,17 @@
+## manual steps for installation of apache2
+
+## sudo apt update
+## sudo apt install apache2 -y
+
+## apt in ansible = ansible.builtin.apt:
+---
+- name: installation of apache2
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install apache
+      ansible.builtin.apt:
+        name: apache2
+        update_cache: yes
+        state: present
+       

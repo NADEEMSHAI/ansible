@@ -1,0 +1,42 @@
+# sudo yum update
+# sudo yum install httpd -y
+# sudo systemctl start httpd
+# sudo yum install php -y
+# sudo systemctl restart httpd
+# sudo -i
+   # /var/www/html/info.php
+   #<?php phpinfo (); ?>
+   # These command for to set the php path in sudoers user
+   #exit
+# sudo systemctl restart httpd
+
+---
+- name: installation of lamp
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update packages installing redhat
+      ansible.builtin.yum:
+          name: httpd
+          update_cache: yes
+          state: present
+    - name: enable systemctl start httpd
+      ansible.builtin.systemd:
+        name: httpd
+        enabled: yes
+        state: started
+    - name: installing php packages
+      ansible.builtin.yum:
+        name:
+          - php
+          - libapache2-mod-php
+          - php-mysql
+        state: present
+    - name: copy the info.php
+      ansible.builtin.copy:
+        src: info.php
+        dest: /var/www/html/info.php
+    - name: restart systemctl
+      ansible.builtin.systemd:
+        name: httpd
+        state: restarted
