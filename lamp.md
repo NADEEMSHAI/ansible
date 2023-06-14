@@ -53,3 +53,13 @@ PROBLEM: During every playbook execution the apache service is getting restarted
 
 
 
+### REDHAT LAMP 
+----------------
+
+* So we have take a REDHAT machine and written a lamp using yum package and checked for syntax and checks after that we applied the playbook it was showing error because in " hosts: all "
+* So we cant give all in hosts because thier  a ubuntu machine so redhat playbook will fail. So we need to need redhat.
+![PREVIEW](IMAGES/RA4.png)
+![PREVIEW](IMAGES/RA1.png)
+![PREVIEW](IMAGES/RA2.png)
+![PREVIEW](IMAGES/RA3.png)
+![PREVIEW](IMAGES/RA5.png)

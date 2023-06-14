@@ -12,7 +12,7 @@
 
 ---
 - name: installation of lamp
-  hosts: all
+  hosts: redhat  # in invetory file we have ubuntu and redhat both ip if u give all it will run in both and ubuntu will fail
   become: yes
   tasks:
     - name: Update packages installing redhat
@@ -29,14 +29,17 @@
       ansible.builtin.yum:
         name:
           - php
-          - libapache2-mod-php
-          - php-mysql
         state: present
+      notify:
+        - restart redhat
     - name: copy the info.php
       ansible.builtin.copy:
         src: info.php
         dest: /var/www/html/info.php
-    - name: restart systemctl
+      notify:
+        - restart redhat
+  handlers:
+    - name: restart redhat
       ansible.builtin.systemd:
         name: httpd
         state: restarted
