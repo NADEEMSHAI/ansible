@@ -63,3 +63,34 @@
   ![PRE](IMAGES/C5.png)
 
   ![PRE](IMAGES/C6.png)
+
+
+####  ANSIBLE VARIABLES
+----------------------
+
+* As of now we have created ansible infrastructure and run the yaml files to install the softwares apache2, httpd, php,mysql.
+* If you observer we have written the inventory/hosts file which contains the information about the ip address of nodes  which  we  written in yaml format.
+* But now onwords i'm writting in " INI " format which looks like below 
+  
+  ![PRE](IMAGES/C7.png)
+
+* Here something new i have added right, So those are called ANISBLE VARAIBLES.
+
+       * Here it means that were ever i tell apache2 to install or restart it will be replace by packages_name         " packages_name=apache2 "
+       * Here also the same case but in one variable i'm passing three installation of ( php, php-mysql, libapache2-mod-php ) were ever i tell to install  it will also replace by "  php_packages='["php","libapache2-mod-php","php-mysql"]'  " 
+       * So here in one variable i have 3 task to do in ubuntu and in redhat one varible have only one task so like that you can pass the task her this method is called " LOOPING "
+  
+*  @ GENERIC OS PACKAGE MANAGER
+
+* Generic os package manager does if running this module in ubuntu it will automatically run " apt " or in redhat " yum ". So here you no need to specify the package manager "yum, apt ". So that you can go a head with your task with multiple operating systems
+* So like this we pass the varibles in the files this is starting stage later on will change lot data into varaibles.
+  
+
+   ![PRE](IMAGES/C8.png)
+   ![PRE](IMAGES/C9.png)
+
+* So i made two changesets one in hosts file two in combined file.
+
+
+* So if u observer here when i run the file first time changes was made by ansible because i have given the varaibles so that i created them onces after that when i run again it dosn't creat anything beacuse those all already created.
+  

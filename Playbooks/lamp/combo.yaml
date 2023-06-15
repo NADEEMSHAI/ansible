@@ -1,56 +1,56 @@
 ---
 - name: installation of lamp
-  hosts: all # if we give ' all ' it will run in redhat also it will fail
+  hosts: all # if we give ' all ' it will run in unbunt & redhat 
   become: yes
+  vars: 
+    info_php: /var/www/html/info.php
   tasks:
     - name: Update packages installing ubuntu
       ansible.builtin.apt:
-          name: apache2
+          name: "{{ packages_name }}"
           update_cache: yes
           state: present
       when: ansible_facts['os_family'] == 'Debian'
     - name: installing php packages
       ansible.builtin.apt:
-        name:
-          - php
-          - libapache2-mod-php
-          - php-mysql
+        name: "{{ item }}"         
         state: present
+      loop: "{{ php_packages }}"
       notify:
         - restart ubuntu
       when: ansible_facts['os_family'] == 'Debian'
     - name: copy the info.php
       ansible.builtin.copy:
         src: info.php
-        dest: /var/www/html/info.php 
+        dest: info_php 
       notify:
         - restart ubuntu  
       when: ansible_facts['os_family'] == 'Debian'  
     - name: Update packages installing redhat
       ansible.builtin.yum:
-          name: httpd
+          name: "{{ packages_name }}"
           update_cache: yes
           state: present
       when: ansible_facts['os_family'] == 'RedHat'  
  
     - name: enable systemctl start httpd
       ansible.builtin.systemd:
-        name: httpd
+        name: "{{ packages_name }}"
         enabled: yes
         state: started
       when: ansible_facts['os_family'] == 'RedHat'
     - name: installing php packages
       ansible.builtin.yum:
-        name:
-          - php
+        name: "{{ item }}"
         state: present
+      loop: "{{ php_packages }}"  
       notify:
         - restart redhat
       when: ansible_facts['os_family'] == 'RedHat'
     - name: copy the info.php
       ansible.builtin.copy:
         src: info.php
-        dest: /var/www/html/info.php
+        dest: info_php
       notify:
         - restart redhat
       when: ansible_facts['os_family'] == 'RedHat'

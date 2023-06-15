@@ -1,0 +1,11 @@
+
+[ubuntu]
+172.31.9.40  packages_name=apache2 php_packages='["php","libapache2-mod-php","php-mysql"]'
+
+
+[RedHat]
+172.31.13.89 packages_name=apache2 php_packages='["php"]'
+
+[webserver]
+172.31.9.40
+172.31.13.89
