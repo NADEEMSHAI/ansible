@@ -99,7 +99,11 @@
 
 * So if u observer here when i run the file first time changes was made by ansible because i have given the varaibles so that i created them onces after that when i run again it dosn't creat anything beacuse those all already created.
 
-* So here we have a new concept if you do ansible-playbook --help | less then you will " -e "
+* So after that we are adding the packages to the files and reduces the steps using the variables and packages.
+* Refer here for adding packages 
+    [refer]https://github.com/NADEEMSHAI/ansible/commit/ee8e2faa3012251d4702d4a0a3005ae04e415c63
+
+ So here we have a new concept if you do ansible-playbook --help | less then you will " -e "
     - e : EXTRA_VARS, -- extra-vars ..: set additional varaibles as key=value or yaml | json, if film=name prepend with @ 
     * " ansible-playbook -i inventory/hosts playbook/lamp/combo.yaml -e 'info_php=/var/www/html/myinfo.php' --check  " 
     * Here -e will be the super power command which will override the your yaml file variable.
@@ -108,4 +112,6 @@
    
    ![pre](IMAGES/C10.png)
 
-* AS you can see i also define that 
+* Let me introduce the ansible.builtin.debug: whichh is nothing but a msg for every task for task get executed the message will print.
+
+ 

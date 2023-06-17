@@ -2,15 +2,20 @@
 - name: installation of lamp
   hosts: all # if we give ' all ' it will run in unbunt & redhat 
   become: yes
-  vars:
-     info_php: /var/www/html/info.php
+  
   tasks:
-    - name: 
+    - name: print the os family 
+      ansible.builtin.debug:
+        msg: "family {{ ansible_facts['os_family'] }}, distribution {{ ansible_facts['distribution'] }}"
+    
     - name: Update packages installing apache2 httpd
       ansible.builtin.package:
         name: "{{ packages_name }}"
         state: present
-      
+    - name: install apache httpd
+      ansible.builtin.debug:
+        msg: "Installing both web servers {{ packages_name }}"
+
     - name: installing php packages
       ansible.builtin.package:
         name: "{{ item }}"         
@@ -18,19 +23,28 @@
       loop: "{{ php_packages }}"
       notify:
         - restart apache
+    - name: install php packages
+      ansible.builtin.debug:
+        msg: " Installing {{ php_packages }}"    
   
     - name: enable systemctl start 
       ansible.builtin.systemd:
         name: "{{ packages_name }}"
         enabled: yes
         state: started
+    - name: setting systemctl
+      ansible.builtin.debug:
+        msg: " service started "
 
     - name: copy the info.php
       ansible.builtin.copy:
         src: info.php
-        dest: info_php
+        dest: "{{ info_php }}"
       notify:
         - restart apache
+    - name: coping the php path
+      ansible.builtin.debug:
+        msg: " copying the php path from "
 
   handlers:
     - name: restart apache
