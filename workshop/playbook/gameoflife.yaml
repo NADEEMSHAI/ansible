@@ -1,0 +1,28 @@
+---
+- name: install gameoflife
+  hosts: all
+  become: yes
+  tasks:
+    - name: install open jdk 8
+      ansible.builtin.apt:
+        name: "{{ packages }}" 
+        update_cache: yes
+        state: present
+      notify:
+        - restart service
+
+    - name: wget gameoflife  
+      ansible.builtin.get_url module:
+        url: https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/gameoflife.war
+        dest: /var/lib/tomcat9/webapps/gameoflife.war
+
+  handlers:
+    - name: restart service
+      ansible.builtin.service:
+        name: "{{ packages }}"
+        state: restarted
+    
+    
+        
+
+          
