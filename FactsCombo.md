@@ -60,6 +60,9 @@
 
   ![pre](IMAGES/C4.png)
 
+  * Refer here for changes
+    [refer]https://github.com/NADEEMSHAI/ansible/commit/6afd5488e5498273037a3d79238eb5c481dfaa83
+
   ![PRE](IMAGES/C5.png)
 
   ![PRE](IMAGES/C6.png)
@@ -84,6 +87,8 @@
 
 * Generic os package manager does if running this module in ubuntu it will automatically run " apt " or in redhat " yum ". So here you no need to specify the package manager "yum, apt ". So that you can go a head with your task with multiple operating systems
 * So like this we pass the varibles in the files this is starting stage later on will change lot data into varaibles.
+  [refer]https://github.com/NADEEMSHAI/ansible/commit/714be85850e06517e068e0dbf273fe23700c339d
+  * Refer here for changes
   
 
    ![PRE](IMAGES/C8.png)
@@ -93,4 +98,14 @@
 
 
 * So if u observer here when i run the file first time changes was made by ansible because i have given the varaibles so that i created them onces after that when i run again it dosn't creat anything beacuse those all already created.
-  
+
+* So here we have a new concept if you do ansible-playbook --help | less then you will " -e "
+    - e : EXTRA_VARS, -- extra-vars ..: set additional varaibles as key=value or yaml | json, if film=name prepend with @ 
+    * " ansible-playbook -i inventory/hosts playbook/lamp/combo.yaml -e 'info_php=/var/www/html/myinfo.php' --check  " 
+    * Here -e will be the super power command which will override the your yaml file variable.
+* So one thing i want to change the idea of defineing the varibles in inventory it works. But i dont want to so lets see how to reslove. 
+* For that i was creating two new floders in inventory as group_vars and hosts_vars in that i'm crearting tha files just like as below 
+   
+   ![pre](IMAGES/C10.png)
+
+* AS you can see i also define that 

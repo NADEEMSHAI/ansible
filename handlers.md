@@ -20,7 +20,9 @@
   ![PRE](IMAGES/H3.png)
 
  * So here ansible is done my work without error in ubuntu but in redhat it will fail because the package manager is apt. So i just modified the main.yaml fine " hosts: ubuntu ".
-  
+* Refer here for cahnges
+   [refer]https://github.com/NADEEMSHAI/ansible/commit/07f1e2219b186551fbf4cf2cad4be2748d52c25f
+     
  ![PRE](IMAGES/H4.png)
 
 * After modification when i reapply the ansible command it wont work out again and again it just shown that work is already done  CHANGES=0
@@ -31,4 +33,5 @@
   ![PRE](IMAGES/H6.png)
   
 * HENCE WE RESLOVED FIRST PROBLEM OF RESTARTING EVERY TIME 
+
 
