@@ -7,7 +7,7 @@
     - name: Run this tasks if only it was Ubuntu or redhat only
       ansible.builtin.fail:
         msg: This playbook design only for ubuntu and  redhat
-      when: ansible_facts['distribution'] != "ubuntu" ansible_facts['distribution'] != redhat
+      when: ansible_facts['distribution'] != "Ubuntu" ansible_facts['distribution'] != "RedHat"
 
     - name: print the os family 
       ansible.builtin.debug:

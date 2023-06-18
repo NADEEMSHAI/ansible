@@ -82,7 +82,10 @@
        * Here it means that were ever i tell apache2 to install or restart it will be replace by packages_name         " packages_name=apache2 "
        * Here also the same case but in one variable i'm passing three installation of ( php, php-mysql, libapache2-mod-php ) were ever i tell to install  it will also replace by "  php_packages='["php","libapache2-mod-php","php-mysql"]'  " 
        * So here in one variable i have 3 task to do in ubuntu and in redhat one varible have only one task so like that you can pass the task her this method is called " LOOPING "
-  
+
+## Ansible packages
+----------------------
+
 *  @ GENERIC OS PACKAGE MANAGER
 
 * Generic os package manager does if running this module in ubuntu it will automatically run " apt " or in redhat " yum ". So here you no need to specify the package manager "yum, apt ". So that you can go a head with your task with multiple operating systems
@@ -116,5 +119,36 @@
 * Refer here for ansible.builtn.debug: 
    [refer]https://github.com/NADEEMSHAI/ansible/commit/fdc93822de57b7771857bc060bbb49aed1cab4a4
 
-    
+### Ansible failed condition concept 
+-------------------------------------
  
+ * so we have given the " ansible.builtin.fail "
+ * so we have add a failed condition to the playbook which means if i run the playbook in other os like centos or other it will fail rather than ubuntu & redhat.
+* Here in the yaml file every stage syntax check was must if you wirte the small " u " instead of " U " in some condition then also it fail.
+* So what is the fail condition over here is if this runs in " != " it denotes not equal to 
+    * " ansible_facts['distribution'] != "Ubuntu" ansible_facts['distribution'] !="RedHat" " 
+* Refer here of the changes in the file 
+   [refer]https://github.com/NADEEMSHAI/ansible/commit/acdd031307a868f9a9313cfa33fe6913725b6d03
+
+* If you observer we have added here " verbosity: 1 " below the every task it shows about more information about that task.
+    ( NOTE: We can use maximum of 5 verbosity )
+
+* So here you can see some error of syntax and also spelling mistakes so be if any got take refers of google ansible example file. After that check the systax or spell of files.
+    
+    ![PRE](IMAGES/C13.png)
+    ![pre](IMAGES/C14.png)
+
+* After successfully creation with ansible.builtin.fail and verbosity here the results
+   
+   ![pre](IMAGES/C15.png)
+   ![PRE](IMAGES/C16.png)
+
+* SO UPTO NOW WE HAVE COMPLETED THE ANSIBLE COMBINED FILE WITH DIFFERENT CONCEPTS LIKE
+     * Combining the UBUNUT & REDHAT yaml files
+     * Ansible Facts
+     * Ansible Varibles 
+     * Ansible packages 
+     * Ansible Filed & Conditions
+     * Different types of Yaml files
+
+
