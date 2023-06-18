@@ -4,10 +4,15 @@
   become: yes
   
   tasks:
+    - name: Run this tasks if only it was Ubuntu or redhat only
+      ansible.builtin.fail:
+        msg: This playbook design only for ubuntu and  redhat
+      when: ansible_facts['distribution'] != "ubuntu" ansible_facts['distribution'] != redhat
+
     - name: print the os family 
       ansible.builtin.debug:
         msg: "family {{ ansible_facts['os_family'] }}, distribution {{ ansible_facts['distribution'] }}"
-    
+        
     - name: Update packages installing apache2 httpd
       ansible.builtin.package:
         name: "{{ packages_name }}"
@@ -15,6 +20,7 @@
     - name: install apache httpd
       ansible.builtin.debug:
         msg: "Installing both web servers {{ packages_name }}"
+        verbostiy: 1 
 
     - name: installing php packages
       ansible.builtin.package:
@@ -26,7 +32,8 @@
     - name: install php packages
       ansible.builtin.debug:
         msg: " Installing {{ php_packages }}"    
-  
+        verbostiy: 1
+
     - name: enable systemctl start 
       ansible.builtin.systemd:
         name: "{{ packages_name }}"
@@ -35,6 +42,7 @@
     - name: setting systemctl
       ansible.builtin.debug:
         msg: " service started "
+        verbostiy: 1
 
     - name: copy the info.php
       ansible.builtin.copy:
@@ -45,7 +53,8 @@
     - name: coping the php path
       ansible.builtin.debug:
         msg: " copying the php path from "
-
+        verbostiy: 1
+        
   handlers:
     - name: restart apache
       ansible.builtin.systemd:
