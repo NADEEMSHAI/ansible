@@ -20,7 +20,7 @@
     - name: install apache httpd
       ansible.builtin.debug:
         msg: "Installing both web servers {{ packages_name }}"
-        verbostiy: 1 
+        verbosity: 1 
 
     - name: installing php packages
       ansible.builtin.package:
@@ -32,7 +32,7 @@
     - name: install php packages
       ansible.builtin.debug:
         msg: " Installing {{ php_packages }}"    
-        verbostiy: 1
+        verbosity: 1
 
     - name: enable systemctl start 
       ansible.builtin.systemd:
@@ -42,7 +42,7 @@
     - name: setting systemctl
       ansible.builtin.debug:
         msg: " service started "
-        verbostiy: 1
+        verbosity: 1
 
     - name: copy the info.php
       ansible.builtin.copy:
@@ -53,7 +53,7 @@
     - name: coping the php path
       ansible.builtin.debug:
         msg: " copying the php path from "
-        verbostiy: 1
+        verbosity: 1
         
   handlers:
     - name: restart apache
