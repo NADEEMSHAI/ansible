@@ -114,7 +114,17 @@ WantedBy=multi-user.target
     * VERSION=10.1.9...... CHECK THE VERSION UPTODATE
     * wget https://www-eu.apache.org/dist/tomcat/tomcat-10/v${VERSION}/bin/apache-tomcat-${VERSION}.tar.gz -P /tmp
 * So here we have wget which will be download from the link. In ansible we use url instead of wget
-* If you oberver we have " ${VERSION} "  " -${VERSION} " here in both condition $ is present it means that remember when we use the echo hello then it will print hello similarly here also it will print version but we need to run it * So lets us check in ansible we use JINJA script like {{ version }} in both places we define the version in vars file. Lets do it 
+* If you oberver we have " ${VERSION} "  " -${VERSION} " here in both condition $ is present it means that remember when we use the echo hello then it will print hello similarly here also it will print version but we need to run it * So lets us check in ansible we use JINJA script like {{ version }} in both places we define the version in vars file. Lets do it refer here [refer]https://github.com/NADEEMSHAI/ansible/commit/fcaa06325a51dabe800a1650953d232c1f1b180a
+   ![pre](PLAYBOOKS/Tomcat/imagestom/t6.png)
+    
+    * So here we got error because i had given the total url which got error here if you observe the last " -p /tmp " it means that after download the tomcat put in temp destination folder. which is not known to ansible it will work in manually 
+    * For that i'm writting dest: "/temp/apache-tomcat-{{ VERSION }}.tar.gz" ....after i remove that -p it works
+     ![pre](PLAYBOOKS/Tomcat/imagestom/t7.png)
+
+* Lets move to next step. Here we it is extracting the tomcat file from tar to /opt/tomcat/ homedirectory
+    *  sudo tar -xf /tmp/apache-tomcat-${VERSION}.tar.gz -C /opt/tomcat/.... tar  what is in ansible ansible.builtin.unarchive:
+    * remote_src: Set to true to indicate the archived file is already on the remote system and not local to the Ansible controller.This option is mutually exclusive with copy. this would be default in false condition.
+
 
 
 
