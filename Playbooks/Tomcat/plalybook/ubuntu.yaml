@@ -1,0 +1,27 @@
+---
+#    * sudo apt update 
+#    * sudo apt install openjdk-11-jdk
+#    * java -version
+#    * sudo useradd -m -U -d /opt/tomcat -s /bin/false tomcat
+#    * VERSION=10.1.9...... CHECK THE VERSION UPTODATE
+#    * wget https://www-eu.apache.org/dist/tomcat/tomcat-10/v${VERSION}/bin/apache-tomcat-${VERSION}.tar.gz -P /tmp
+#    * sudo tar -xf /tmp/apache-tomcat-${VERSION}.tar.gz -C /opt/tomcat/
+#    * sudo ln -s /opt/tomcat/apache-tomcat-${VERSION} /opt/tomcat/latest
+#    * sudo chown -R tomcat: /opt/tomcat
+#    * sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
+#    * sudo nano /etc/systemd/system/tomcat.service........ here we have to add some data in nano
+#    * sudo systemctl daemon-reload
+#    * sudo systemctl enable --now tomcat
+#    * sudo systemctl status tomcat
+  
+- name: TOMCAT Installation
+  become: yes
+  hosts: all
+  tasks: 
+    - name: install java 11
+      ansible.builtin.package:
+        name: "{{ java }}"
+        update_cache: yes
+        state: present
+    
+
