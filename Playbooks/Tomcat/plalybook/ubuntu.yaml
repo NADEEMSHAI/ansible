@@ -24,4 +24,17 @@
         update_cache: yes
         state: present
     
+    - name: adding group
+      ansible.builtin.group:
+        name: "{{ group }}"
+        state: present
+    - name: adding user
+      ansible.builtin.user:
+        name: "{{ user }}"
+        create_home: yes
+        group: "{{ group }}"
+        home: "{{ homedir }}"
+        shell: "{{ shell }}" 
+
+
 

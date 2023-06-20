@@ -86,8 +86,25 @@ WantedBy=multi-user.target
 * As of now we can see that we succesfully created up end runnning tomcat server and also tomcat configuration manger service.
 * Let us do it with the anisble-playbook. For that we have to setup the ansible infrastructre first and a new folder of tomcat in that we need one of Playbook/ubuntu.yaml folder and Group_vars/tomcat.yaml/tomcat.service.j2 folder and inventory/hosts.
 
-* 
+* So now i am going step by step writting the playbook refers of manual commands. Now i have completed the fisrt step of java installation with playbook. 
+* Refer here for changes and tomcat infra structure
+  
+  * sudo apt update 
+  * sudo apt install openjdk-11-jdk
+  * java -version
+ 
+   [refer]https://github.com/NADEEMSHAI/ansible/commit/2b0ac9fd0ac604d24305c8c319c3dfc23a9e019e
+ 
+   ![pre](PLAYBOOKS/Tomcat/imagestom/t4.png)
 
-      
-   
+* Now lets us create the a group and user for tomcat and along with  shell in home directry of /opt/tomcat.
+  
+      * sudo useradd -m -U -d /opt/tomcat -s /bin/false tomcat
+      * Here -m : create a new user home directory if it does not exists
+      * -u : create a group with the same name as the user and add the user into this group
+      * -d : the new user will be created using HOME_DIR as the value for the user login directory. the deafult is append thelogin name ti BASE_DIR and use that as the login directly 
+      * -s : the name of user login shell. the default is to leave this filed blank, which causes the system to select the default login shell specified by the shell variable in /etc/default/useradd or and empty string by defult.
+      * create_home :Unless set to false, a home directory will be made for the user when the account is created or if the home directory does not exist. " Changed from createhome to create_home "
+
+
 

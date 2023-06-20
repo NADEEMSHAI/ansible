@@ -1,2 +1,6 @@
 ---
 java: openjdk-11-jdk
+user: tomcat
+group: tomcat
+shell: /bin/false
+homedir: /opt/tomcat
