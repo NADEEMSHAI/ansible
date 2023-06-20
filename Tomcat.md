@@ -105,6 +105,19 @@ WantedBy=multi-user.target
       * -d : the new user will be created using HOME_DIR as the value for the user login directory. the deafult is append thelogin name ti BASE_DIR and use that as the login directly 
       * -s : the name of user login shell. the default is to leave this filed blank, which causes the system to select the default login shell specified by the shell variable in /etc/default/useradd or and empty string by defult.
       * create_home :Unless set to false, a home directory will be made for the user when the account is created or if the home directory does not exist. " Changed from createhome to create_home "
+  * Here you can see the changes for the user add and group add of tomcat.
+     Refer here [refer]https://github.com/NADEEMSHAI/ansible/commit/705bc9c2f939ace23770d3913403b0d5700d8c53
+               ![pre](PLAYBOOKS/Tomcat/imagestom/t5.png)
+
+* Lets move to the next command installation of tomcat here you need to check the version up to date.
+
+    * VERSION=10.1.9...... CHECK THE VERSION UPTODATE
+    * wget https://www-eu.apache.org/dist/tomcat/tomcat-10/v${VERSION}/bin/apache-tomcat-${VERSION}.tar.gz -P /tmp
+* So here we have wget which will be download from the link. In ansible we use url instead of wget
+* If you oberver we have " ${VERSION} "  " -${VERSION} " here in both condition $ is present it means that remember when we use the echo hello then it will print hello similarly here also it will print version but we need to run it * So lets us check in ansible we use JINJA script like {{ version }} in both places we define the version in vars file. Lets do it 
+
+
+
 
 
 
