@@ -227,4 +227,14 @@ WantedBy=multi-user.target
    
     ![pre](PLAYBOOKS/Tomcat/imagestom/t18.png)
 
-* So the tomcat is up end running we done the first process 
+* So the tomcat is up end running we done the first process
+ 
+   ![pre](PLAYBOOKS/Tomcat/imagestom/t20.png)
+
+*  REFER HERE FOR CHANGES
+    [REFER]https://github.com/NADEEMSHAI/ansible/commit/d14bf0ac948a447c71d980e53824d4c912bb085e
+
+* As of now this should be bring up the tomcat server and also as we can see three task should be rinning everytime. So that should be fixed it is happening at extract tomcat
+* So do i need to extract tomcat everytime...?
+* For that i have a idea  when /opt/tomcat/ -> apache-tomcat-10.0.10 latest. when this folder exist then dont extract. So how can i know it is exists or not.
+  
