@@ -47,4 +47,9 @@
       dest: "{{ homedir }}"
       remote_src: yes 
 
+    - name: create tomcat link
+      ansible.builtin.file:
+        src: "{{ homedir }}/apache-tomcat-{{ version }}"
+        dest: "{{ homedir }}/latest"
+        state: link 
 

@@ -125,11 +125,14 @@ WantedBy=multi-user.target
     *  sudo tar -xf /tmp/apache-tomcat-${VERSION}.tar.gz -C /opt/tomcat/.... tar  what is in ansible ansible.builtin.unarchive:
     * remote_src: Set to true to indicate the archived file is already on the remote system and not local to the Ansible controller.This option is mutually exclusive with copy. this would be default in false condition.
 * Refer here for the changes [refer]https://github.com/NADEEMSHAI/ansible/commit/5c4b40a47b6ce36e2c8a2411822f46bc6eb506ee
-  
-  
+* Here we are facing error
+  ![pre](PLAYBOOKS/Tomcat/imagestom/t9.png)
+* ERROR resloved
+  [refer]https://github.com/NADEEMSHAI/ansible/commit/be9e3089f88d7cd06fac906b589488c790539ff9
+  ![pre](PLAYBOOKS/Tomcat/imagestom/t8.png)
 
-
-
-
+* Lets move to the next step. Here we are try to create a symbol link (just like a short cut if you have a folder in c drive in that some other folder is present we make that folder short cut on desktop )
+  *  sudo ln -s /opt/tomcat/apache-tomcat-${VERSION} /opt/tomcat/latest
+  * here ln -s means softlink. A soft link isn't a seprate file, it points to the name if the original file, rather than to a spot on the harddrive. 
 
 
