@@ -86,6 +86,9 @@ WantedBy=multi-user.target
 * As of now we can see that we succesfully created up end runnning tomcat server and also tomcat configuration manger service.
 * Let us do it with the anisble-playbook. For that we have to setup the ansible infrastructre first and a new folder of tomcat in that we need one of Playbook/ubuntu.yaml folder and Group_vars/tomcat.yaml/tomcat.service.j2 folder and inventory/hosts.
 
+### STEP .1. INSTALL JAVA
+------------
+
 * So now i am going step by step writting the playbook refers of manual commands. Now i have completed the fisrt step of java installation with playbook. 
 * Refer here for changes and tomcat infra structure
   
@@ -96,6 +99,9 @@ WantedBy=multi-user.target
    [refer]https://github.com/NADEEMSHAI/ansible/commit/2b0ac9fd0ac604d24305c8c319c3dfc23a9e019e
  
    ![pre](PLAYBOOKS/Tomcat/imagestom/t4.png)
+
+### STEP .2. CREATE USER GROUP
+-------------------
 
 * Now lets us create the a group and user for tomcat and along with  shell in home directry of /opt/tomcat.
   
@@ -109,6 +115,9 @@ WantedBy=multi-user.target
      Refer here [refer]https://github.com/NADEEMSHAI/ansible/commit/705bc9c2f939ace23770d3913403b0d5700d8c53
                ![pre](PLAYBOOKS/Tomcat/imagestom/t5.png)
 
+### STEP .3. INSTALL TOMCAT
+-----------------
+
 * Lets move to the next command installation of tomcat here you need to check the version up to date.
 
     * VERSION=10.1.9...... CHECK THE VERSION UPTODATE
@@ -121,6 +130,9 @@ WantedBy=multi-user.target
     * For that i'm writting dest: "/temp/apache-tomcat-{{ VERSION }}.tar.gz" ....after i remove that -p it works
      ![pre](PLAYBOOKS/Tomcat/imagestom/t7.png)
 
+### STEP .4. EXTRACT TOMCAT
+--------------------------------------
+
 * Lets move to next step. Here we it is extracting the tomcat file from tar to /opt/tomcat/ homedirectory
     *  sudo tar -xf /tmp/apache-tomcat-${VERSION}.tar.gz -C /opt/tomcat/.... tar  what is in ansible ansible.builtin.unarchive:
     * remote_src: Set to true to indicate the archived file is already on the remote system and not local to the Ansible controller.This option is mutually exclusive with copy. this would be default in false condition.
@@ -132,7 +144,9 @@ WantedBy=multi-user.target
   ![pre](PLAYBOOKS/Tomcat/imagestom/t8.png)
 
    * sudo ls /opt/tomcat/
-  
+
+### STEP .5. CREATE LINK
+-----------------------  
 
 * Lets move to the next step. Here we are try to create a symbol link (just like a short cut if you have a folder in c drive in that some other folder is present we make that folder short cut on desktop )
 * Lets do it link in ansible. ansible.builtin.file:
@@ -153,6 +167,11 @@ WantedBy=multi-user.target
      * sudo ls -al /opt/tomcat/.... you can check here in node latest is created 
      ![pre](PLAYBOOKS/Tomcat/imagestom/t11.png)
 
+
+### STEP .6. OWNERSHIP TO TOMCAT USER
+-------------------------------------------
+
+
 * So now we are changing the all ownership premission from all in tomcat to user of tomcat only.
     * sudo chown -R tomcat: /opt/tomcat
 * Lets do it chown in ansible. ansible.builtin.file:
@@ -169,6 +188,9 @@ WantedBy=multi-user.target
     * sudo ls -al /opt/tomcat
 * So here and before task if you observe the extract task was skipping every time we will  if it NOTE THIS PROBLEM.
   
+### STEP .7. SHELL CHMOD
+------------------------
+
 * So now to explain this commond we will see two manul commands first
 *  sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
 
@@ -182,5 +204,27 @@ WantedBy=multi-user.target
     * sudo ls -al /opt/tomcat/latest/bin/ | grep sh
     *  You can see all premission are same.But it not a good idea because it will not maintain state. Their is other way lets see 
 * REFER HERE FOR CHANGES
-    [REFER]
+    [REFER]https://github.com/NADEEMSHAI/ansible/commit/25291f36f64596f5b48b8ca87324d0ce5bd16d82
     ![PRE](PLAYBOOKS/Tomcat/imagestom/t15.png)
+
+### STEP .8. CREATE SERVICE JINJA2
+------------------------------------
+
+* We need to create a service file but it has dynamic content, so copying static file is not an option, Ansible has tempenting 
+   * For expression we use jinja templates.
+   * For modules we use templates modules.
+* So we use to see in our yaml files. "{{ var_name }}" this type is comes from jinja templates.
+* So here for passing the nano file data we will create a serivce file in playbook -> tomcat.service.j2
+* In that we replace user = {{ user }} ..... group = {{ group }} also /opt/tomcat= {{ homedir }} 
+* Lets see the how should be it done.
+    ![pre](PLAYBOOKS/Tomcat/imagestom/t16.png)
+
+* So lets check this how to check if see cat this path sudo ls -al /etc/systemd/system/tomcat.service in node it will show the tomcat service file is add and if we cat the path it should print the serive file.
+   
+    ![pre](PLAYBOOKS/Tomcat/imagestom/t17.png)
+   
+    ![pre](PLAYBOOKS/Tomcat/imagestom/t19.png)
+   
+    ![pre](PLAYBOOKS/Tomcat/imagestom/t18.png)
+
+* So the tomcat is up end running we done the first process 
