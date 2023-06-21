@@ -131,8 +131,41 @@ WantedBy=multi-user.target
   [refer]https://github.com/NADEEMSHAI/ansible/commit/be9e3089f88d7cd06fac906b589488c790539ff9
   ![pre](PLAYBOOKS/Tomcat/imagestom/t8.png)
 
+   * sudo ls /opt/tomcat/
+  
+
 * Lets move to the next step. Here we are try to create a symbol link (just like a short cut if you have a folder in c drive in that some other folder is present we make that folder short cut on desktop )
+* Lets do it link in ansible. ansible.builtin.file:
+
   *  sudo ln -s /opt/tomcat/apache-tomcat-${VERSION} /opt/tomcat/latest
-  * here ln -s means softlink. A soft link isn't a seprate file, it points to the name if the original file, rather than to a spot on the harddrive. 
+
+  * here ln -s means softlink. A soft link isn't a seprate file, it points to the name if the original file, rather than to a spot on the harddrive.
+  * state: HARD:  If hard, the hard link will be created or changed.
+  * Stare: SOFT:  If link, the symbolic link will be created or changed. 
+  * src :Path of the file to link to. This applies only to state=link and state=hard. PRESENT TOMCAT DESTINATION /opt/tomcat/apache-tomcat-${VERSION}
+  * dest:  /opt/tomcat/latest we need to copy (or) creat a shortcut this dest.
+* REFER HERE FOR CAHANGES 
+      [REFER] https://github.com/NADEEMSHAI/ansible/commit/7faf39a9a80b69723dca69f11135751b20e168e7
+
+    ![pre](PLAYBOOKS/Tomcat/imagestom/t12.png)
+    ![PRE](PLAYBOOKS/Tomcat/imagestom/T10.png)
+     
+     * sudo ls -al /opt/tomcat/.... you can check here in node latest is created 
+     ![pre](PLAYBOOKS/Tomcat/imagestom/t11.png)
+
+* So now we are changing the all ownership premission from all in tomcat to user of tomcat only.
+    * sudo chown -R tomcat: /opt/tomcat
+* Lets do it chown in ansible. ansible.builtin.file:
+  
+    * owner: Name of the user that should own the filesystem object, as would be fed to chown. 
+    * recurse : Recursively set the specified file attributes on directory contents. This applies only when state is set to directory.
+    * path : Path to the file being managed.
+* REFER HERE FOR CAHANGES 
+    [REFER]
+
+    ![pre](PLAYBOOKS/Tomcat/imagestom/t13.png)
+    ![pre](PLAYBOOKS/Tomcat/imagestom/t14.png)
+* So here and before task if you observe the extract task was skipping every time we will  if it NOTE THIS PROBLEM.
+  
 
 

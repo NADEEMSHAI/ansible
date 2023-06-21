@@ -53,3 +53,11 @@
         dest: "{{ homedir }}/latest"
         state: link 
 
+    - name: ownership premission for user
+      ansible.builtin.file:
+        path: "{{ homedir }}"
+        state: directory
+        recurse: yes
+        owner: "{{ user }}"
+        group: "{{ group }}"
+
