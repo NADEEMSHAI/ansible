@@ -60,4 +60,7 @@
         recurse: yes
         owner: "{{ user }}"
         group: "{{ group }}"
-
+ 
+    - name: add execute premission
+      ansible.builtin.shell:
+        cmd: chmod +x "{{ homedir }}/latest/bin/*.sh

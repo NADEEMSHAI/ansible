@@ -161,11 +161,26 @@ WantedBy=multi-user.target
     * recurse : Recursively set the specified file attributes on directory contents. This applies only when state is set to directory.
     * path : Path to the file being managed.
 * REFER HERE FOR CAHANGES 
-    [REFER]
+    [REFER]https://github.com/NADEEMSHAI/ansible/commit/b9487b5829b3590f86eb7fb57c0ac39b44bb34ce
 
     ![pre](PLAYBOOKS/Tomcat/imagestom/t13.png)
     ![pre](PLAYBOOKS/Tomcat/imagestom/t14.png)
+
+    * sudo ls -al /opt/tomcat
 * So here and before task if you observe the extract task was skipping every time we will  if it NOTE THIS PROBLEM.
   
+* So now to explain this commond we will see two manul commands first
+*  sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
 
-
+   * sudo ls -al /opt/tomcat/latest/bin/
+   * sudo ls -al /opt/tomcat/latest/bin/ | grep sh
+  
+* So now basically in the first command you would see all the files  premissions where as second command it will only show sh file all premissions 
+* Apply second command in ansible also premission will not same.
+* So let me directly run the linux command from ansible. when you running directly a linux command it will never be an idempotent.
+* when ever you will run a playbook it will execute. Their will be a low level command like cmd,shell,run it will execute everytime you run playbook.
+    * sudo ls -al /opt/tomcat/latest/bin/ | grep sh
+    *  You can see all premission are same.But it not a good idea because it will not maintain state. Their is other way lets see 
+* REFER HERE FOR CHANGES
+    [REFER]
+    ![PRE](PLAYBOOKS/Tomcat/imagestom/t15.png)
