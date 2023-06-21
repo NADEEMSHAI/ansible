@@ -4,4 +4,4 @@ user: tomcat
 group: tomcat
 shell: /bin/false
 homedir: /opt/tomcat
-VERSION: 10.1.10
+version: 10.1.10

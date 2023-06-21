@@ -124,7 +124,9 @@ WantedBy=multi-user.target
 * Lets move to next step. Here we it is extracting the tomcat file from tar to /opt/tomcat/ homedirectory
     *  sudo tar -xf /tmp/apache-tomcat-${VERSION}.tar.gz -C /opt/tomcat/.... tar  what is in ansible ansible.builtin.unarchive:
     * remote_src: Set to true to indicate the archived file is already on the remote system and not local to the Ansible controller.This option is mutually exclusive with copy. this would be default in false condition.
-
+* Refer here for the changes [refer]https://github.com/NADEEMSHAI/ansible/commit/5c4b40a47b6ce36e2c8a2411822f46bc6eb506ee
+  
+  
 
 
 
